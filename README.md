@@ -5,28 +5,12 @@ This guide explains how to install PHP and Apache HTTP Server (`httpd`) on Windo
 ---
 
 ## Prerequisites
+## 1. Install Apache HTTP Server
 
 1. **Visual C++ Redistributable**
-   - Download and install the appropriate version for your PHP version:
-     - PHP 5.6: [Visual C++ Redistributable for Visual Studio 2012](https://www.microsoft.com/en-us/download/details.aspx?id=30679)
-     - PHP 7.0-7.1: [Visual C++ Redistributable for Visual Studio 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48145)
-     - PHP 7.2-7.4: [Visual C++ Redistributable for Visual Studio 2017](https://aka.ms/vs/16/release/vc_redist.x64.exe)
-     - PHP 8.x: [Visual C++ Redistributable for Visual Studio 2019 or 2022](https://aka.ms/vs/17/release/vc_redist.x64.exe)
-
-2. **Ensure your system meets the requirements**:
-   - Windows 7 or newer.
-
----
-
-## 1. Install Apache HTTP Server (`httpd`)
-
-1. **Download Apache**:
-   - Visit [Apache Lounge Downloads](https://www.apachelounge.com/download/) or download directly:
-     - [Apache 2.4 VC15 (Win64)](https://www.apachelounge.com/download/VS16/binaries/httpd-2.4.57-win64-VS16.zip).
-
-2. **Extract Apache**:
+   - Download and install the repository 
    - Extract the ZIP file to `c:\services` or another location.
-3. **Configure Apache**:
+2. **Configure Apache**:
    - Open the `httpd.conf` file located in `c:\services\httpd\conf` and update the following lines:
      ```apache
         Define SRVROOT "c:/services/httpd"
@@ -34,15 +18,19 @@ This guide explains how to install PHP and Apache HTTP Server (`httpd`) on Windo
         Define DIRROOT "c:/www"
      ```
 
-4. **Start Apache**:
+4. **Install & Start Apache**:
    - Open Command Prompt as Administrator.
    - Navigate to the Apache `bin` directory:
      ```cmd
      cd C:/services/httpd/bin
      ```
-   - Start the Apache server:
+   - Install the Apache server:
      ```cmd
      httpd.exe -k install
+     ```
+  - Start the Apache server:
+     ```cmd
+     httpd -k start
      ```
 
 ---
@@ -68,7 +56,7 @@ This guide explains how to install PHP and Apache HTTP Server (`httpd`) on Windo
     ---
 
 2. **Extract PHP**:
-   - Extract the ZIP file to `C:/services/php` or another location.
+   - Extract the ZIP file to `C:/services/php/5.6 .....` or another location.
 
 3. **Configure PHP**:
    - Rename `php.ini-development` or `php.ini-production` to `php.ini`.
@@ -85,7 +73,7 @@ This guide explains how to install PHP and Apache HTTP Server (`httpd`) on Windo
        ```
 
 4. **Add PHP to System Path**:
-   - Add `C:\php` to the system `Path` environment variable.
+   - Add `c:/services/php` to the system `Path` environment variable.
 
 5. **Verify PHP**:
    - Open Command Prompt and type:
@@ -98,12 +86,10 @@ This guide explains how to install PHP and Apache HTTP Server (`httpd`) on Windo
 ## 3. Integrate PHP with Apache HTTP Server
 
 1. **Configure Apache to Use PHP**:
-   - Open the `httpd.conf` file in `C:\Apache24\conf`.
+   - Open the `httpd.conf` file in `c:/services/httpd/bin`.
    - Add the following lines at the end of the file:
      ```apache
-     LoadModule php_module "C:/php/php8apache2_4.dll"
-     AddHandler application/x-httpd-php .php
-     PHPIniDir "C:/php"
+
      ```
 
 2. **Restart Apache**:
@@ -113,13 +99,13 @@ This guide explains how to install PHP and Apache HTTP Server (`httpd`) on Windo
      ```
 
 3. **Test PHP with Apache**:
-   - Create a `phpinfo.php` file in the `htdocs` directory (`C:\Apache24\htdocs`) with the following content:
+   - Create a `phpinfo.php` file in the `htdocs` directory (`c:/www`) with the following content:
      ```php
      <?php
      phpinfo();
      ?>
      ```
-   - Open your browser and navigate to `http://localhost/phpinfo.php`. You should see the PHP information page.
+   - Open your browser and navigate to `http://localhost:9056/phpinfo.php`. You should see the PHP information page. PHP 5.6
 
 ---
 
@@ -135,7 +121,7 @@ This guide explains how to install PHP and Apache HTTP Server (`httpd`) on Windo
 - **PHP extensions not working**:
   - Verify the `extension_dir` setting in `php.ini` matches your PHP installation:
     ```ini
-    extension_dir = "C:/php/ext"
+    extension_dir = "c:/services/php/5.6/ext"
     ```
 
 ---
