@@ -25,13 +25,13 @@ This guide explains how to install PHP and Apache HTTP Server (`httpd`) on Windo
      - [Apache 2.4 VC15 (Win64)](https://www.apachelounge.com/download/VS16/binaries/httpd-2.4.57-win64-VS16.zip).
 
 2. **Extract Apache**:
-   - Extract the ZIP file to `C:\Apache24` or a location of your choice.
-
+   - Extract the ZIP file to `c:/services` or another location.
 3. **Configure Apache**:
-   - Open the `httpd.conf` file located in `C:\Apache24\conf` and update the following lines:
+   - Open the `httpd.conf` file located in `c:/services/httpd/conf` and update the following lines:
      ```apache
-     ServerRoot "C:/Apache24"
-     DocumentRoot "C:/Apache24/htdocs"
+        Define SRVROOT "c:/services/httpd"
+        Define DIRPHP "c:/services/php"
+        Define DIRROOT "c:/www"
      ```
 
 4. **Start Apache**:
