@@ -29,16 +29,16 @@ This guide explains how to install PHP and Apache HTTP Server (`httpd`) on Windo
 3. **Configure Apache**:
    - Open the `httpd.conf` file located in `c:\services\httpd\conf` and update the following lines:
      ```apache
-        Define SRVROOT "c:\services\httpd"
-        Define DIRPHP "c:\services\php"
-        Define DIRROOT "c:\www"
+        Define SRVROOT "c:/services/httpd"
+        Define DIRPHP "c:/services/php"
+        Define DIRROOT "c:/www"
      ```
 
 4. **Start Apache**:
    - Open Command Prompt as Administrator.
    - Navigate to the Apache `bin` directory:
      ```cmd
-     cd C:\services\httpd\bin
+     cd C:/services/httpd/bin
      ```
    - Start the Apache server:
      ```cmd
@@ -68,7 +68,7 @@ This guide explains how to install PHP and Apache HTTP Server (`httpd`) on Windo
     ---
 
 2. **Extract PHP**:
-   - Extract the ZIP file to `C:\services\php` or another location.
+   - Extract the ZIP file to `C:/services/php` or another location.
 
 3. **Configure PHP**:
    - Rename `php.ini-development` or `php.ini-production` to `php.ini`.
