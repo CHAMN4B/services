@@ -57,42 +57,6 @@ This guide explains how to install PHP and Apache HTTP Server (`httpd`) on Windo
 
 2. **Extract PHP**:
    - Extract the ZIP file to `C:/services/php/5.6 .....` or another location.
-    Using the PHP version you downloaded fcgi enabled & vhost-host configured
-    ```cmd
-        Listen 9056
-        <VirtualHost *:9056>
-            ServerName localhost:9056
-            FcgidInitialEnv PATH "${DIRPHP}/5.6;C:/WINDOWS/system32;C:/WINDOWS;C:/WINDOWS/System32/Wbem;"
-            FcgidInitialEnv SystemRoot "C:/Windows"
-            FcgidInitialEnv SystemDrive "C:"
-            FcgidInitialEnv TEMP "C:/WINDOWS/Temp"
-            FcgidInitialEnv TMP "C:/WINDOWS/Temp"
-            FcgidInitialEnv windir "C:/WINDOWS"
-            FcgidIOTimeout 64
-            FcgidConnectTimeout 16
-            FcgidMaxRequestsPerProcess 1000
-            FcgidMaxRequestLen 8131072
-            # Location php.ini:
-            FcgidInitialEnv PHPRC "${DIRPHP}/5.6"
-            FcgidInitialEnv PHP_FCGI_MAX_REQUESTS 1000
-            DirectoryIndex index.php
-            FcgidInitialEnv SystemRoot "C:/Windows"
-            FcgidInitialEnv SystemDrive "C:"
-
-            <Files ~ "\.php$>"
-                AddHandler fcgid-script .php
-                FcgidWrapper "${DIRPHP}/5.6/php-cgi.exe" .php
-            </Files>
-
-            DocumentRoot "${DIRROOT}"
-            <Directory "${DIRROOT}">
-                Require all granted
-                Options Indexes FollowSymLinks Includes ExecCGI
-                AllowOverride All
-            </Directory>
-        </VirtualHost>
-    ```
-
 3. **Configure PHP**:
    - Rename `php.ini-development` or `php.ini-production` to `php.ini`.
    - Open `php.ini` in a text editor and:
@@ -121,11 +85,43 @@ This guide explains how to install PHP and Apache HTTP Server (`httpd`) on Windo
 ## 3. Integrate PHP with Apache HTTP Server
 
 1. **Configure Apache to Use PHP**:
-   - Open the `httpd.conf` file in `c:/services/httpd/bin`.
-   - Add the following lines at the end of the file:
-     ```apache
+   - Open the `httpd-vhosts.conf` file in `c:/services/httpd/conf/extra/httpd-vhosts.conf`.
+    Using the PHP version you downloaded fcgi enabled & vhost-host configured
+    add the following configuration:
+    ```cmd
+    Listen 9081
+    <VirtualHost *:9081>
+        ServerName localhost:9081
+        FcgidInitialEnv PATH "${DIRPHP}/8.1;C:/WINDOWS/system32;C:/WINDOWS;C:/WINDOWS/System32/Wbem;"
+        FcgidInitialEnv SystemRoot "C:/Windows"
+        FcgidInitialEnv SystemDrive "C:"
+        FcgidInitialEnv TEMP "C:/WINDOWS/Temp"
+        FcgidInitialEnv TMP "C:/WINDOWS/Temp"
+        FcgidInitialEnv windir "C:/WINDOWS"
+        FcgidIOTimeout 64
+        FcgidConnectTimeout 16
+        FcgidMaxRequestsPerProcess 1000
+        FcgidMaxRequestLen 8131072
+        # Location php.ini:
+        FcgidInitialEnv PHPRC "${DIRPHP}/8.1"
+        FcgidInitialEnv PHP_FCGI_MAX_REQUESTS 1000
+        DirectoryIndex index.php
+        FcgidInitialEnv SystemRoot "C:/Windows"
+        FcgidInitialEnv SystemDrive "C:"
 
-     ```
+        <Files ~ "\.php$>"
+            AddHandler fcgid-script .php
+            FcgidWrapper "${DIRPHP}/8.1/php-cgi.exe" .php
+        </Files>
+
+        DocumentRoot "${DIRROOT}"
+        <Directory "${DIRROOT}">
+            Require all granted
+            Options Indexes FollowSymLinks Includes ExecCGI
+            AllowOverride All
+        </Directory>
+    </VirtualHost>
+    ```
 
 2. **Restart Apache**:
    - Restart Apache to apply the changes:
