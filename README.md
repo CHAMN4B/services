@@ -72,7 +72,7 @@ This guide explains how to install PHP and Apache HTTP Server (`httpd`) on Windo
        ```
 
 4. **Add PHP to System Path**:
-   - Add `c:/services/php` to the system `Path` environment variable.
+   - Add `c:/services/php/5.6` to the system `Path` environment variable.
 
 5. **Verify PHP**:
    - Open Command Prompt and type:
